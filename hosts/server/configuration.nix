@@ -9,6 +9,7 @@
     [
       ./hardware-configuration.nix
       ./networking.nix
+      ./neovim.nix
     ];
 
   boot.loader = {
@@ -56,7 +57,6 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    neovim
     wget
     curl
   ];
