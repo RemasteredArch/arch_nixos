@@ -65,8 +65,10 @@
 
   services.openssh = {
     enable = true;
-    PermitRootLogin = "no";
-    AllowUsers = [ "arch" ];
+    settings = {
+      PermitRootLogin = "no";
+      AllowUsers = [ "arch" ];
+    };
   };
 
   services.fail2ban.enable = true;
