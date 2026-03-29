@@ -18,6 +18,16 @@
     grub.device = "/dev/nvme0n1";
   };
 
+  fileSystems ="/mnt/a" = {
+      device = "/dev/disk/by-uuid/dccb31af-23f7-4438-9d44-42cd0f1cd144";
+      fsType = "ext4";
+  };
+
+  fileSystems."/mnt/b" = {
+      device = "/dev/disk/by-uuid/7e710081-95b4-4e76-a5e1-ada5f3119059";
+      fsType = "ext4";
+   };
+
   time.timeZone = "America/Los_Angeles";
 
   i18n.defaultLocale = "en_US.UTF-8";
