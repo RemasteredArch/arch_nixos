@@ -7,14 +7,21 @@
     linkConfig.Name = "eth";
   };
 
-  networking = {
-    hostName = "arch-server"; # Define your hostname.
+  # Provides multicast DNS and DNS service discovery. Requires UDP port 5353 to be open.
+  services.avahi.enable = true;
 
-    # Open ports in the firewall.
+  networking = {
+    hostName = "arch-server";
+
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 ];
-      allowedUDPPorts = [];
+      allowedTCPPorts = [
+        22 # Used by OpenSSH.
+      ];
+      allowedUDPPorts = [
+        9    # Used for Wake on LAN.
+        5353 # Used by Avahi for mDNS/DNS-SD.
+      ];
     };
 
     # IPv6 is a myth invented by big IANA to scare you into using DHCP!
@@ -26,6 +33,8 @@
         address = "192.168.68.212";
         prefixLength = 22;
       }];
+
+      wakeOnLan.enable = true;
     };
 
     nameservers = ["75.75.75.75" "76.76.76.76"];
