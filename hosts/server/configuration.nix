@@ -2,105 +2,109 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+    config,
+    lib,
+    pkgs,
+    ...
+}:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./networking.nix
-      ./neovim.nix
+    imports = [
+        ./hardware-configuration.nix
+        ./networking.nix
+        ./neovim.nix
     ];
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
-    grub.device = "/dev/nvme0n1";
-  };
-
-  fileSystems ="/mnt/a" = {
-      device = "/dev/disk/by-uuid/dccb31af-23f7-4438-9d44-42cd0f1cd144";
-      fsType = "ext4";
-  };
-
-  fileSystems."/mnt/b" = {
-      device = "/dev/disk/by-uuid/7e710081-95b4-4e76-a5e1-ada5f3119059";
-      fsType = "ext4";
-   };
-
-  time.timeZone = "America/Los_Angeles";
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  services.xserver.xkb.layout = "us";
-
-  # Don't forget to set a password!
-  users.users.arch = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      # act
-      b3sum
-      bat
-      caddy
-      xcaddy
-      # cloudflared
-      docker
-      eza
-      fzf
-      gcc
-      gh
-      git
-      javaPackages.compiler.openjdk25
-      jq
-      net-tools
-      ripgrep
-      rustup
-      shellcheck
-      tealdeer
-      tmux
-      unzip
-      zip
-    ];
-  };
-
-  environment.systemPackages = with pkgs; [
-    vim
-
-    wget
-    curl
-
-    htop
-    btop
-  ];
-
-  virtualisation.docker.enable = true;
-
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      AllowUsers = [ "arch" ];
+    boot.loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+        grub.device = "/dev/nvme0n1";
     };
-  };
 
-  services.fail2ban.enable = true;
+    fileSystems."/mnt/a" = {
+        device = "/dev/disk/by-uuid/dccb31af-23f7-4438-9d44-42cd0f1cd144";
+        fsType = "ext4";
+    };
 
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.11"; # Did you read the comment?
+    fileSystems."/mnt/b" = {
+        device = "/dev/disk/by-uuid/7e710081-95b4-4e76-a5e1-ada5f3119059";
+        fsType = "ext4";
+    };
+
+    time.timeZone = "America/Los_Angeles";
+
+    i18n.defaultLocale = "en_US.UTF-8";
+    services.xserver.xkb.layout = "us";
+
+    # Don't forget to set a password!
+    users.users.arch = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" ];
+        packages = with pkgs; [
+            # act
+            b3sum
+            bat
+            caddy
+            xcaddy
+            # cloudflared
+            docker
+            eza
+            fzf
+            gcc
+            gh
+            git
+            javaPackages.compiler.openjdk25
+            jq
+            net-tools
+            ripgrep
+            rustup
+            shellcheck
+            tealdeer
+            tmux
+            unzip
+            zip
+        ];
+    };
+
+    environment.systemPackages = with pkgs; [
+        vim
+
+        wget
+        curl
+
+        htop
+        btop
+    ];
+
+    virtualisation.docker.enable = true;
+
+    services.openssh = {
+        enable = true;
+        settings = {
+            PermitRootLogin = "no";
+            AllowUsers = [ "arch" ];
+        };
+    };
+
+    services.fail2ban.enable = true;
+
+    # This option defines the first version of NixOS you have installed on this particular machine,
+    # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+    #
+    # Most users should NEVER change this value after the initial install, for any reason,
+    # even if you've upgraded your system to a new NixOS release.
+    #
+    # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+    # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
+    # to actually do that.
+    #
+    # This value being lower than the current NixOS release does NOT mean your system is
+    # out of date, out of support, or vulnerable.
+    #
+    # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+    # and migrated your data accordingly.
+    #
+    # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+    system.stateVersion = "25.11"; # Did you read the comment?
 }
