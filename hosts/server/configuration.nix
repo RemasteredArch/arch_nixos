@@ -41,7 +41,6 @@
       # act
       b3sum
       bat
-      btop
       caddy
       xcaddy
       # cloudflared
@@ -51,7 +50,6 @@
       gcc
       gh
       git
-      htop
       javaPackages.compiler.openjdk25
       jq
       net-tools
@@ -67,8 +65,12 @@
 
   environment.systemPackages = with pkgs; [
     vim
+
     wget
     curl
+
+    htop
+    btop
   ];
 
   virtualisation.docker.enable = true;
