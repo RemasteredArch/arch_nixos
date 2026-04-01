@@ -13,7 +13,7 @@
     imports = [
         ./hardware-configuration.nix
         ./networking.nix
-        ./neovim.nix
+        ../../common/neovim-minimal.nix
     ];
 
     boot.loader = {
