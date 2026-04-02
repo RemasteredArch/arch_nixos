@@ -5,13 +5,12 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, ... }:
+args@{ config, lib, pkgs, ... }:
 
 {
     imports = [
         # include NixOS-WSL modules
         <nixos-wsl/modules>
-        ../../common/tmux.nix
         ../../common/neovim-minimal.nix
     ];
 
@@ -19,6 +18,8 @@
         enable = true;
         wsl.defaultUser = "arch";
     };
+
+    programs.tmux = import ../../common/tmux.nix args;
 
     environment.systemPackages = with pkgs; [
         act
@@ -40,7 +41,6 @@
         rustup
         shellcheck
         tealdeer
-        tmux
         unzip
         zip
 
