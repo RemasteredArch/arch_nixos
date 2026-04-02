@@ -55,6 +55,36 @@ in
         };
 
         plugins = {
+            telescope = {
+                enable = true;
+                settings.defaults.wrap_results = true;
+                extensions.fzf-native.enable = true;
+                keymaps = {
+                    "ff" = {
+                        action = "find_files";
+                        options.desc = "Open a file picker for the current directory";
+                    };
+                    "fg" = {
+                        action = "git_files";
+                        options.desc = "Open a file picker for Git files";
+                    };
+                    "flg" = {
+                        action = "live_grep";
+                        options.desc = "Open a live regex search";
+                    };
+                    "fls" = {
+                        action = "lsp_document_symbols";
+                        options.desc = "Open a live document symbol search from LSP";
+                    };
+                    "flh" = {
+                        action = "help_tags";
+                        options.desc = "Open a help tag search";
+                    };
+
+                };
+            };
+            web-devicons.enable = true; # Used by Telescope.
+
             treesitter = {
                 enable = true;
 
