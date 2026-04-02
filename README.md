@@ -20,6 +20,8 @@ sudo ln -s "$conf_dir" /etc/nixos
 
 sudo nixos-rebuild switch # On a normal NixOS install.
 sudo nixos-rebuild boot # On a NixOS-WSL install (subsequently use `switch`). Reboot afterwards.
+
+sudo passwd arch
 ```
 
 - To install NixOS-WSL, see:
