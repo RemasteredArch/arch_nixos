@@ -12,33 +12,57 @@ args@{ config, lib, pkgs, ... }:
         # include NixOS-WSL modules
         <nixos-wsl/modules>
         ../../common/neovim-minimal.nix
+        ./home-manager.nix
     ];
 
     wsl = {
         enable = true;
-        wsl.defaultUser = "arch";
+        defaultUser = "arch";
     };
 
+    users.users.arch = {
+        isNormalUser = true;
+    };
+
+    time.timeZone = "America/Los_Angeles";
+
+    # Maintain the user's editor preferences when running commands with `sudo`.
+    security.sudo.extraConfig = ''
+        Defaults:%sudo env_keep += "EDITOR"
+        Defaults:%sudo env_keep += "VISUAL"
+        Defaults:%sudo env_keep += "SYSTEMD_EDITOR"
+    '';
+
     programs.tmux = import ../../common/tmux.nix args;
+
+    services.gnome.gnome-keyring.enable = true;
+    programs.gnupg.agent = {
+        enable = true;
+        enableSSHSupport = true;
+        pinentryPackage = pkgs.pinentry-curses;
+    };
 
     environment.systemPackages = with pkgs; [
         act
         b3sum
         bat
         caddy
-        xcaddy
         # cloudflared
         docker
         eza
+        file
         fzf
         gcc
         gh
         git
+        gnupg
         javaPackages.compiler.openjdk25
         jq
+        man
         net-tools
         ripgrep
         rustup
+        xcaddy
         shellcheck
         tealdeer
         unzip
