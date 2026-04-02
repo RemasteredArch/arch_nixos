@@ -36,6 +36,25 @@ sudo passwd arch
     e.g., [nixos-anywhere](https://github.com/nix-community/nixos-anywhere).
     This is just one way to do it.
 
+### Signing
+
+The `loaner-laptop` is configured to sign Git commits,
+and expects there to be a certain secret key present in the GPG keyring.
+From an instance that already holds the secret key, export it like so:
+
+```sh
+gpg --export-secret-keys F1FC345F046EBB98 > RemasteredArch.asc
+```
+
+Transfer this file to `loaner-laptop`,
+importing it from `loaner-laptop` like so:
+
+```sh
+gpg --import ./RemasteredArch.asc
+```
+
+This will likely be replaced with a [sops-nix](https://github.com/Mic92/sops-nix) (or similar tool) secret eventually.
+
 ## Hosts
 
 - `hosts/server/`: my home server.
