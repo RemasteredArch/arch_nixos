@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+args@{ config, pkgs, lib, ... }:
 
 let
     home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
@@ -73,6 +73,8 @@ in
                 bell-style = "none";
             };
         };
+
+        programs.tmux = import ../../common/tmux.nix (args // { minimal = false; });
 
         home.file.".config/nvim".source = nvim-config;
 
