@@ -24,13 +24,49 @@ in
     imports = [ (import "${home-manager}/nixos") ];
 
     home-manager.users.arch = { pkgs, ... }: {
-        home.packages = [
-            pkgs.baobab
-            pkgs.bc
-            pkgs.pfetch
-            pkgs.toilet
-            pkgs.seahorse
-            pkgs.wslu
+        home.packages = with pkgs; [
+            # Development tools.
+            #
+            # Some of these should probably be system packages, not user packages, but I'll move
+            # them when I actually get around to using them.
+            act
+            caddy
+            xcaddy
+            # cloudflared
+            docker
+            clang
+            gcc
+            javaPackages.compiler.openjdk25
+            rustup
+            shellcheck
+            typst
+
+            # File searching/viewing/manipulation
+            b3sum
+            bat
+            eza
+            file
+            fzf
+            jq
+            ripgrep
+
+            # Compression and encrpytion
+            gnupg
+            unzip
+            zip
+
+            # Utilities
+            bc
+            tealdeer
+            wslu
+
+            # Fun
+            pfetch
+            toilet
+
+            # GUI utilities
+            baobab
+            seahorse
         ];
 
         programs.starship = import ../../common/starship.nix;
@@ -69,7 +105,7 @@ in
             variables = {
                 # Case insensitive tab completion.
                 completion-ignore-case = true;
-                # Stop ringing bells in the shell
+                # Stop ringing bells in the shell.
                 bell-style = "none";
             };
         };

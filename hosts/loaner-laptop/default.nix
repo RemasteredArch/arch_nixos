@@ -43,33 +43,11 @@ args@{ config, lib, pkgs, ... }:
     };
 
     environment.systemPackages = with pkgs; [
-        act
-        b3sum
-        bat
-        caddy
-        # cloudflared
-        docker
-        eza
-        file
-        fzf
-        gcc
-        gh
-        git
-        gnupg
-        javaPackages.compiler.openjdk25
-        jq
         man
-        net-tools
-        ripgrep
-        rustup
-        xcaddy
-        shellcheck
-        tealdeer
-        unzip
-        zip
 
         vim
 
+        net-tools
         wget
         curl
 
