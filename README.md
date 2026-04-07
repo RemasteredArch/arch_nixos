@@ -12,7 +12,7 @@ git clone 'https://github.com/RemasteredArch/arch_nixos' "$conf_dir"
 cat << 'EOF' > "$conf_dir/configuration.nix"
 { config, lib, pkgs, ... }:
 
-{ imports = [ ./hosts/server ]; }
+{ imports = [ ./hosts/server ]; } # Or whatever other host you would like to use.
 EOF
 
 sudo rm -r /etc/nixos # Are you sure you want to do this?
@@ -22,6 +22,9 @@ sudo nixos-rebuild switch # On a normal NixOS install.
 sudo nixos-rebuild boot # On a NixOS-WSL install (subsequently use `switch`). Reboot afterwards.
 
 sudo passwd arch
+
+# On `loaner-laptop`, the default is to allow you to use a custom Neovim configuration.
+git clone 'https://github.com/RemasteredArch/nvim-config' "${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
 ```
 
 - To install NixOS-WSL, see:

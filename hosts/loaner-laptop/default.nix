@@ -24,7 +24,15 @@ args@{ config, lib, pkgs, ... }:
         isNormalUser = true;
     };
 
+    services.arch-home-manager = {
+        enable = true;
+        trackedNeovimConfig = false;
+    };
+
     time.timeZone = "America/Los_Angeles";
+
+    # Enable developer documentation that some packages optionally provide.
+    documentation.dev.enable = true;
 
     # Maintain the user's editor preferences when running commands with `sudo`.
     security.sudo.extraConfig = ''
@@ -32,6 +40,28 @@ args@{ config, lib, pkgs, ... }:
         Defaults:%sudo env_keep += "VISUAL"
         Defaults:%sudo env_keep += "SYSTEMD_EDITOR"
     '';
+
+    programs.nix-ld = {
+        enable = true;
+        libraries = with pkgs; [
+            zlib
+            zstd
+            stdenv.cc.cc
+            curl
+            openssl
+            attr
+            libssh
+            bzip2
+            libxml2
+            acl
+            libsodium
+            util-linux
+            xz
+            systemd
+
+            icu
+        ];
+    };
 
     programs.tmux = import ../../common/tmux.nix args;
 
