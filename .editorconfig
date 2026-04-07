@@ -18,9 +18,11 @@ binary_next_line = true
 # 72-column Git commit messages, as is typical.
 [.git/COMMIT_EDITMSG]
 max_line_length = 72
+indent_size = 2
 
 [**.{md,typ}]
 # Unlimited line lengths for use with Semantic Line Breaks.
 #
 # <https://sembr.org/>
 max_line_length = unset
+indent_size = 2
