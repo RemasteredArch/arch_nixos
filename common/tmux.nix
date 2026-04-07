@@ -60,6 +60,9 @@ in
         # More ergonomic leader key.
         set -g prefix C-s
 
+        # Vim-style bindings instead of Emacs-style bindings.
+        set-window-option -g mode-keys vi
+
         # Set escape sequence delay to 10 ms.
         #
         # See: <https://github.com/tmux/tmux/wiki/FAQ#what-is-the-escape-time-option-is-zero-a-good-value>.
