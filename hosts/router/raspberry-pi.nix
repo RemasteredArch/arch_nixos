@@ -4,4 +4,7 @@
         raspberry-pi-5.base
         raspberry-pi-5.page-size-16k # Performance fixes, allegedly.
     ];
+
+    # Recommended for new installations.
+    boot.loader.raspberry-pi.bootloader = "kernel";
 }
