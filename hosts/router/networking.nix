@@ -36,33 +36,21 @@
 
         # IPv6 is a myth invented by big IANA to scare you into using DHCP!
         enableIPv6 = false;
-        useDHCP = false;
 
-        interfaces = {
-            eth = {
-                ipv4.addresses = [
-                    {
-                        address = "192.168.68.209";
-                        prefixLength = 22;
-                    }
-                ];
+        useDHCP = true;
 
-                wakeOnLan.enable = true;
-            };
-            wwan = {
-                useDHCP = true;
-            };
+        interfaces.eth = {
+            useDHCP = false;
+
+            ipv4.addresses = [
+                {
+                    address = "192.168.68.209";
+                    prefixLength = 22;
+                }
+            ];
+
+            wakeOnLan.enable = true;
         };
-
-        # nameservers = [
-        #     "75.75.75.75"
-        #     "76.76.76.76"
-        # ];
-        #
-        # defaultGateway = {
-        #     address = "192.168.68.1";
-        #     interface = "eth";
-        # };
 
         hosts = {
             "192.168.68.210" = [ "arch-laptop" ];
