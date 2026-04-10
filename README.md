@@ -20,6 +20,7 @@ sudo ln -s "$conf_dir" /etc/nixos
 
 sudo nixos-rebuild switch # On a normal NixOS install.
 sudo nixos-rebuild boot # On a NixOS-WSL install (subsequently use `switch`). Reboot afterwards.
+sudo nixos-rebuild switch --flake .#router # For `router`.
 
 sudo passwd arch
 
@@ -62,3 +63,4 @@ This will likely be replaced with a [sops-nix](https://github.com/Mic92/sops-nix
 
 - `hosts/server/`: my home server.
 - `hosts/loaner-laptop/`: the NixOS-WSL instance running on my current laptop.
+- `hosts/router/`: my router, a Raspberry Pi 5.
