@@ -5,10 +5,14 @@
     disko,
     ...
 }:
+
+let
+    pkgs = nixos-raspberrypi.legacyPackages.aarch64-linux;
+in
 {
     imports = [
         ./networking.nix
-        ../../common/neovim-minimal.nix
+        # ../../common/neovim-minimal.nix
     ];
 
     # Don't forget to set a password!
@@ -18,7 +22,7 @@
         extraGroups = [
             "wheel"
         ];
-        packages = with nixpkgs; [
+        packages = with pkgs; [
             bat
             eza
             git
@@ -37,7 +41,7 @@
     i18n.defaultLocale = "en_US.UTF-8";
     services.xserver.xkb.layout = "us";
 
-    environment.systemPackages = with nixpkgs; [
+    environment.systemPackages = with pkgs; [
         vim
 
         wget
@@ -56,4 +60,6 @@
     };
 
     services.fail2ban.enable = true;
+
+    system.stateVersion = "25.11";
 }

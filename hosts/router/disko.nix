@@ -1,5 +1,7 @@
-{ ... }:
+{ disko, ... }:
 {
+    imports = [ disko.nixosModules.disko ];
+
     disko.devices.disk.sdCard = {
         type = "disk";
         device = "/dev/mmcblk0";
@@ -15,7 +17,7 @@
                         0 # Required partition.
                     ];
 
-                    size = "1GiB";
+                    size = "1G";
                     content = {
                         type = "filesystem";
                         mountpoint = "/boot/firmware";
@@ -36,7 +38,7 @@
                         2 # Legacy BIOS Bootable, for U-Boot to find extlinux config.
                     ];
 
-                    size = "1GiB";
+                    size = "1G";
                     content = {
                         type = "filesystem";
                         format = "vfat";

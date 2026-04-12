@@ -2,11 +2,16 @@
     description = "A NixOS-based router configuration for a Raspberry Pi 5.";
 
     inputs = {
-        nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-        nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
+        # nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+        nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
+        nixos-raspberrypi = {
+            url = "github:nvmd/nixos-raspberrypi/main";
+            # inputs.nixpkgs.follows = "nixpkgs";
+        };
         disko = {
             url = "github:nix-community/disko";
             inputs.nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
+            # inputs.nixpkgs.follows = "nixpkgs";
         };
     };
 
