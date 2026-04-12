@@ -9,11 +9,11 @@
     systemd.network.links = {
         "10-on-board-ethernet" = {
             matchConfig.PermanentMACAddress = "2c:cf:67:50:3d:bb";
-            linkConfig.Name = "eth";
+            linkConfig.Name = "ob-eth";
         };
         "15-on-board-wifi" = {
             matchConfig.PermanentMACAddress = "ea:25:82:be:7e:b3";
-            linkConfig.Name = "wwan";
+            linkConfig.Name = "ob-wlan";
         };
     };
 
@@ -39,8 +39,8 @@
 
         useDHCP = true;
 
-        interfaces.eth = {
-            useDHCP = false;
+        interfaces.ob-eth = {
+            useDHCP = true;
 
             ipv4.addresses = [
                 {
@@ -55,6 +55,11 @@
         hosts = {
             "192.168.68.210" = [ "arch-laptop" ];
             "192.168.68.211" = [ "arch-pc" ];
+        };
+
+        nftables = {
+            # Keep things declarative.
+            flushRuleset = true;
         };
     };
 }
