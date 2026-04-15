@@ -10,6 +10,10 @@
             matchConfig.PermanentMACAddress = "2c:cf:67:50:3d:bb";
             linkConfig.Name = "ob-eth";
         };
+        "12-usb-ethernet" = {
+            matchConfig.PermanentMACAddress = "0c:37:96:77:8c:32";
+            linkConfig.Name = "usb-eth";
+        };
         "15-on-board-wifi" = {
             matchConfig.PermanentMACAddress = "ea:25:82:be:7e:b3";
             linkConfig.Name = "ob-wlan";
@@ -21,17 +25,6 @@
 
     networking = {
         hostName = "router";
-
-        firewall = {
-            enable = true;
-            allowedTCPPorts = [
-                22 # Used by OpenSSH.
-            ];
-            allowedUDPPorts = [
-                9 # Used for Wake on LAN.
-                5353 # Used by Avahi for mDNS/DNS-SD.
-            ];
-        };
 
         # IPv6 is a myth invented by big IANA to scare you into using DHCP!
         enableIPv6 = false;
@@ -56,7 +49,29 @@
             "192.168.68.211" = [ "arch-pc" ];
         };
 
+        nat = {
+            enable = true;
+            externalInterface = "usb-eth";
+            internalInterfaces = [ "ob-eth" ];
+        };
+
+        # No open ports by default, only open ports on internal interfaces.
+        firewall = {
+            enable = true;
+
+            interfaces.ob-eth = {
+                allowedTCPPorts = [
+                    22 # Used by OpenSSH.
+                ];
+                allowedUDPPorts = [
+                    9 # Used for Wake on LAN.
+                    5353 # Used by Avahi for mDNS/DNS-SD.
+                ];
+            };
+        };
+
         nftables = {
+            enable = true;
             # Keep things declarative.
             flushRuleset = true;
         };
