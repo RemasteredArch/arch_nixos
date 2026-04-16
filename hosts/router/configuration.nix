@@ -77,5 +77,10 @@ in
         };
     };
 
+    services.fail2ban = {
+        enable = true;
+        ignoreIP = [ "arch-pc" ];
+    };
+
     system.stateVersion = "25.11";
 }
