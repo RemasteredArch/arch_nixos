@@ -50,6 +50,8 @@ in
             "nix-command"
             "flakes"
         ];
+        # This is probably insecure, but I'm enabling it to make troubleshooting easier.
+        trusted-users = [ "arch" ];
     };
 
     time.timeZone = "America/Los_Angeles";
