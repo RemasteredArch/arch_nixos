@@ -29,6 +29,11 @@ args@{ config, lib, pkgs, ... }:
         trackedNeovimConfig = false;
     };
 
+    nix.settings = {
+        experimental-features = [ "nix-command" "flakes" ];
+        trusted-users = [ "arch" ];
+    };
+
     time.timeZone = "America/Los_Angeles";
 
     # Enable developer documentation that some packages optionally provide.
