@@ -36,6 +36,19 @@ in
         ];
     };
 
+    nix.settings = {
+        extra-substituters = [
+            "https://nixos-raspberrypi.cachix.org"
+        ];
+        extra-trusted-public-keys = [
+            "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+        ];
+        experimental-features = [
+            "nix-command"
+            "flakes"
+        ];
+    };
+
     time.timeZone = "America/Los_Angeles";
 
     i18n.defaultLocale = "en_US.UTF-8";
@@ -58,8 +71,6 @@ in
             AllowUsers = [ "arch" ];
         };
     };
-
-    services.fail2ban.enable = true;
 
     system.stateVersion = "25.11";
 }

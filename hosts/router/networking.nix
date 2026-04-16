@@ -70,6 +70,11 @@
             };
         };
 
+        services.fail2ban = {
+            enable = true;
+            ignoreIP = [ "arch-pc" ];
+        };
+
         nftables = {
             enable = true;
             # Keep things declarative.
