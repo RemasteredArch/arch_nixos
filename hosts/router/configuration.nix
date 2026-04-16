@@ -34,6 +34,9 @@ in
             unzip
             zip
         ];
+        openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINKSSO9Pg/bRzFb33fJr4MYbeq9HeNK5nGLJBndI5V/A SSH Login Key <81265470+RemasteredArch@users.noreply.github.com>"
+        ];
     };
 
     nix.settings = {
