@@ -59,15 +59,13 @@
         firewall = {
             enable = true;
 
-            interfaces.ob-eth = {
-                allowedTCPPorts = [
-                    22 # Used by OpenSSH.
-                ];
-                allowedUDPPorts = [
-                    9 # Used for Wake on LAN.
-                    5353 # Used by Avahi for mDNS/DNS-SD.
-                ];
-            };
+            allowedTCPPorts = [
+                22 # Used by OpenSSH.
+            ];
+            allowedUDPPorts = [
+                9 # Used for Wake on LAN.
+                5353 # Used by Avahi for mDNS/DNS-SD.
+            ];
         };
 
         nftables = {
