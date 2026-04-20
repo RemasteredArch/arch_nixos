@@ -141,6 +141,7 @@ in
             programs.tmux = import ../../common/tmux.nix (args // { minimal = false; });
 
             home.file.".config/nvim" = lib.mkIf (cfg.trackedNeovimConfig) { source = nvim-config; };
+            home.file.".config/gdb".source = dotfiles + "/.config/gdb";
 
             programs.neovim = {
                 enable = true;
