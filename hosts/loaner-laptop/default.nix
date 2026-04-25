@@ -18,6 +18,17 @@ args@{ config, lib, pkgs, ... }:
     wsl = {
         enable = true;
         defaultUser = "arch";
+        # Explicitly register Windows executable binfmt support to avoid systemd's support breaking
+        # it.
+        interop.register = true;
+    };
+    boot.binfmt = {
+        # Prefer to statically load the emulators into the Kernel to support Docker.
+        preferStaticEmulators = true;
+        # Install emulators (mostly QEMU) for the specified architectures.
+        emulatedSystems = [
+            "aarch64-linux" # AKA `arm64`.
+        ];
     };
 
     users.users.arch = {
