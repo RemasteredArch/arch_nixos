@@ -5,7 +5,12 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-args@{ config, lib, pkgs, ... }:
+args@{
+    config,
+    lib,
+    pkgs,
+    ...
+}:
 
 {
     imports = [
@@ -41,7 +46,10 @@ args@{ config, lib, pkgs, ... }:
     };
 
     nix.settings = {
-        experimental-features = [ "nix-command" "flakes" ];
+        experimental-features = [
+            "nix-command"
+            "flakes"
+        ];
         trusted-users = [ "arch" ];
     };
 
