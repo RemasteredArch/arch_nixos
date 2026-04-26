@@ -82,9 +82,13 @@ args@{ config, lib, pkgs, ... }:
     programs.tmux = import ../../common/tmux.nix args;
 
     services.gnome.gnome-keyring.enable = true;
+    # Enabled by default with gnome-keyring, but I figured it's good to be explicit.
+    services.gnome.gcr-ssh-agent.enable = true;
+    # Not really sure why this isn't set up by the systemd service, but setting this like so makes
+    # SSH use gnome-keyring's SSH agent, so it stays.
+    environment.sessionVariables.SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
     programs.gnupg.agent = {
         enable = true;
-        enableSSHSupport = true;
         pinentryPackage = pkgs.pinentry-curses;
     };
 
