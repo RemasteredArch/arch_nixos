@@ -40,18 +40,16 @@ in
     };
 
     nix.settings = {
-        extra-substituters = [
-            "https://nixos-raspberrypi.cachix.org"
-        ];
-        extra-trusted-public-keys = [
-            "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
-        ];
         experimental-features = [
             "nix-command"
             "flakes"
         ];
-        # This is probably insecure, but I'm enabling it to make troubleshooting easier.
-        trusted-users = [ "arch" ];
+        trusted-users = [ "arch" ]; # TO-DO: remove, this grants passwordless `sudo`.
+
+        extra-substituters = [ "https://nixos-raspberrypi.cachix.org" ];
+        extra-trusted-public-keys = [
+            "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+        ];
     };
 
     time.timeZone = "America/Los_Angeles";
