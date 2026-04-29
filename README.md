@@ -145,3 +145,15 @@ ssh arch@192.168.68.209
 # From the Pi, set the password for `arch`. Set it to whatever you wish.
 passwd
 ```
+
+## License
+
+I haven't decided on a license for these configurations yet
+--- feel free to bother me about it if you'd like to reuse some code from here.
+
+This project, does, however, include code from other projects:
+
+- `pkgs/wslu/package.nix` contains MIT code adopted from Nixpkgs.
+  See that file for more details.
+- `pkgs/wslu/fallback-conf-nix-store.diff` contains a patch of code license `GPL-3.0-or-later`.
+  See [wslu](https://github.com/wslutilities/wslu) for more details.

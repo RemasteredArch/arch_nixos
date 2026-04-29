@@ -120,8 +120,8 @@ in
                         seahorse
 
                         neovim
-                    ];
-                # ++ (if config.wsl.enable then [ wslu ] else [ ]);
+                    ]
+                    ++ (if config.wsl.enable then [ (import ../../pkgs/wslu/package.nix args) ] else [ ]);
 
                 programs.starship = import ../../common/starship.nix;
 
