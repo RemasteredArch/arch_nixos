@@ -2,21 +2,17 @@
     config,
     lib,
     pkgs,
+    inputs,
     ...
 }:
 
 let
-    nixvim = import (
-        builtins.fetchGit {
-            url = "https://github.com/nix-community/nixvim";
-            ref = "nixos-25.11";
-        }
-    );
+    packages = inputs.nixpkgs.legacyPackages.x86_64-linux;
 in
 {
-    imports = [
-        nixvim.nixosModules.nixvim
-    ];
+    # imports = [
+    #     nixvim.nixosModules.nixvim
+    # ];
 
     programs.nixvim = {
         enable = true;
@@ -90,9 +86,10 @@ in
 
                 settings.highlight.enable = true;
                 settings.indent.enable = true;
-                folding = true;
+                # folding = true;
+                folding.enable = true;
 
-                grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+                grammarPackages = with packages.vimPlugins.nvim-treesitter.builtGrammars; [
                     caddy
                     cmake
                     cpp

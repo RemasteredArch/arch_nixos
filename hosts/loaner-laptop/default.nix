@@ -9,24 +9,20 @@ args@{
     config,
     lib,
     pkgs,
+    inputs,
     ...
 }:
 
+let
+    packages = inputs.nixpkgs.legacyPackages.x86_64-linux;
+in
 {
     imports = [
-        # include NixOS-WSL modules
-        <nixos-wsl/modules>
         ../../common/neovim-minimal.nix
         ./home-manager.nix
     ];
 
-    wsl = {
-        enable = true;
-        defaultUser = "arch";
-        # Explicitly register Windows executable binfmt support to avoid systemd's support breaking
-        # it.
-        interop.register = true;
-    };
+    wsl.enable = lib.mkDefault false; # To allow conditionals that don't fail on a missing key.
     boot.binfmt = {
         # Prefer to statically load the emulators into the Kernel to support Docker.
         preferStaticEmulators = true;
@@ -67,7 +63,7 @@ args@{
 
     programs.nix-ld = {
         enable = true;
-        libraries = with pkgs; [
+        libraries = with packages; [
             zlib
             zstd
             stdenv.cc.cc
@@ -97,10 +93,10 @@ args@{
     environment.sessionVariables.SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
     programs.gnupg.agent = {
         enable = true;
-        pinentryPackage = pkgs.pinentry-curses;
+        pinentryPackage = packages.pinentry-curses;
     };
 
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with packages; [
         man
 
         vim

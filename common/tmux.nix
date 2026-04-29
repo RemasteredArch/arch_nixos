@@ -2,6 +2,7 @@
     config,
     lib,
     pkgs,
+    inputs,
     minimal ? true,
     ...
 }:

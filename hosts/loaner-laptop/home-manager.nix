@@ -1,7 +1,8 @@
 args@{
     config,
-    pkgs,
     lib,
+    pkgs,
+    inputs,
     ...
 }:
 
@@ -12,7 +13,6 @@ let
         bold = "\\e[1m";
         green = "\\e[32m";
     };
-    home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz";
     dotfiles = pkgs.fetchFromGitHub {
         owner = "RemasteredArch";
         repo = "dotfiles";
@@ -27,7 +27,7 @@ let
     };
 in
 {
-    imports = [ (import "${home-manager}/nixos") ];
+    # imports = [ home-manager.nixosModules.home-manager ];
 
     options.services.arch-home-manager = {
         enable = lib.mkEnableOption "`arch` home-manager configuration";
@@ -43,10 +43,17 @@ in
     };
 
     config = lib.mkIf cfg.enable {
+        # What does this do?
+        home-manager.useGlobalPkgs = true;
+        # What does this do?
+        home-manager.useUserPackages = true;
+        # What exactly does this do?
+        home-manager.extraSpecialArgs = { nixpkgs = inputs.nixpkgs; };
+
         home-manager.users.arch =
-            { pkgs, ... }:
+            { nixpkgs, ... }:
             {
-                home.packages = with pkgs; [
+                home.packages = with nixpkgs.legacyPackages.x86_64-linux; [
                     # Development tools.
                     #
                     # Some of these should probably be system packages, not user packages, but I'll
@@ -87,7 +94,6 @@ in
                     # Utilities
                     bc
                     tealdeer
-                    wslu
 
                     # Fun
                     fastfetch
@@ -105,7 +111,34 @@ in
                     # GUI utilities
                     baobab
                     seahorse
-                ];
+                ]
+                ++ (with nixpkgs.legacyPackages.x86_64-linux; [
+                        starship
+                        neovim
+
+                        gcc
+                        gnumake
+                        go
+                        nodejs_24
+                        python3
+                        unzip
+
+                        silicon
+                        wl-clipboard
+                        nerd-fonts.caskaydia-cove
+                        noto-fonts-color-emoji
+
+                        cmake
+                        javaPackages.compiler.openjdk25
+                        tree-sitter
+
+                        # Optional performance improvements.
+                        fd
+                        inotify-tools
+
+                        clang-tools # For `clangd`.
+                ]);
+                # ++ (if config.wsl.enable then [ wslu ] else [ ]);
 
                 programs.starship = import ../../common/starship.nix;
 
@@ -150,32 +183,37 @@ in
                 home.file.".config/nvim" = lib.mkIf (cfg.trackedNeovimConfig) { source = nvim-config; };
                 home.file.".config/gdb".source = dotfiles + "/.config/gdb";
 
-                programs.neovim = {
-                    enable = true;
-                    extraPackages = [
-                        pkgs.gcc
-                        pkgs.gnumake
-                        pkgs.go
-                        pkgs.nodejs_24
-                        pkgs.python3
-                        pkgs.unzip
-
-                        pkgs.silicon
-                        pkgs.wl-clipboard
-                        pkgs.nerd-fonts.caskaydia-cove
-                        pkgs.noto-fonts-color-emoji
-
-                        pkgs.cmake
-                        pkgs.javaPackages.compiler.openjdk25
-                        pkgs.tree-sitter
-
-                        # Optional performance improvements.
-                        pkgs.fd
-                        pkgs.inotify-tools
-
-                        pkgs.clang-tools # For `clangd`.
-                    ];
-                };
+                # programs.neovim = {
+                #     enable = true;
+                #
+                #     # # Now default values, but not default during my state version.
+                #     # withRuby = false;
+                #     # withPython3 = false;
+                #
+                #     extraPackages = with nixpkgs.legacyPackages.x86_64-linux; [
+                #         gcc
+                #         gnumake
+                #         go
+                #         nodejs_24
+                #         python3
+                #         unzip
+                #
+                #         silicon
+                #         wl-clipboard
+                #         nerd-fonts.caskaydia-cove
+                #         noto-fonts-color-emoji
+                #
+                #         cmake
+                #         javaPackages.compiler.openjdk25
+                #         tree-sitter
+                #
+                #         # Optional performance improvements.
+                #         fd
+                #         inotify-tools
+                #
+                #         clang-tools # For `clangd`.
+                #     ];
+                # };
 
                 programs.git = {
                     enable = true;
