@@ -87,6 +87,7 @@ in
                         # File searching/viewing/manipulation
                         b3sum
                         bat
+                        dos2unix
                         eza
                         file
                         fzf
