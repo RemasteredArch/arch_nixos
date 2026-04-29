@@ -43,6 +43,10 @@
             disko-rpi,
         }:
         {
+            formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree.override {
+                settings.formatter.nixfmt.options = [ "--indent=4" ];
+            };
+
             nixosConfigurations.wsl = inputs.nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = { inherit inputs; };
