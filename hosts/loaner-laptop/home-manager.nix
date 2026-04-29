@@ -48,71 +48,75 @@ in
         # What does this do?
         home-manager.useUserPackages = true;
         # What exactly does this do?
-        home-manager.extraSpecialArgs = { nixpkgs = inputs.nixpkgs; };
+        home-manager.extraSpecialArgs = {
+            nixpkgs = inputs.nixpkgs;
+        };
 
         home-manager.users.arch =
             { nixpkgs, ... }:
             {
-                home.packages = with nixpkgs.legacyPackages.x86_64-linux; [
-                    # Development tools.
-                    #
-                    # Some of these should probably be system packages, not user packages, but I'll
-                    # move them when I actually get around to using them.
-                    act
-                    gdb
-                    rustup
-                    shellcheck
+                home.packages =
+                    with nixpkgs.legacyPackages.x86_64-linux;
+                    [
+                        # Development tools.
+                        #
+                        # Some of these should probably be system packages, not user packages, but
+                        # I'll move them when I actually get around to using them.
+                        act
+                        gdb
+                        rustup
+                        shellcheck
 
-                    # Server tools
-                    caddy
-                    xcaddy
-                    # cloudflared
-                    docker
+                        # Server tools
+                        caddy
+                        xcaddy
+                        # cloudflared
+                        docker
 
-                    # Compilers and build tools
-                    cmake
-                    ninja
-                    # clang
-                    gcc
-                    javaPackages.compiler.openjdk25
-                    typst
+                        # Compilers and build tools
+                        cmake
+                        ninja
+                        # clang
+                        gcc
+                        javaPackages.compiler.openjdk25
+                        typst
 
-                    # File searching/viewing/manipulation
-                    b3sum
-                    bat
-                    eza
-                    file
-                    fzf
-                    jq
-                    ripgrep
+                        # File searching/viewing/manipulation
+                        b3sum
+                        bat
+                        eza
+                        file
+                        fzf
+                        jq
+                        ripgrep
 
-                    # Compression and encryption
-                    gnupg
-                    unzip
-                    zip
+                        # Compression and encryption
+                        gnupg
+                        unzip
+                        zip
 
-                    # Utilities
-                    bc
-                    tealdeer
+                        # Utilities
+                        bc
+                        tealdeer
 
-                    # Fun
-                    fastfetch
-                    pfetch
-                    toilet
+                        # Fun
+                        fastfetch
+                        pfetch
+                        toilet
 
-                    # Provides man pages for Linux and POSIX APIs.
-                    man-pages
-                    man-pages-posix
+                        # Provides man pages for Linux and POSIX APIs.
+                        man-pages
+                        man-pages-posix
 
-                    # Provides a `batman` command, which is like `man` but syntax highlighted with
-                    # colors.
-                    bat-extras.batman
+                        # Provides a `batman` command, which is like `man` but syntax highlighted
+                        # with colors.
+                        bat-extras.batman
 
-                    # GUI utilities
-                    baobab
-                    seahorse
-                ]
-                ++ (with nixpkgs.legacyPackages.x86_64-linux; [
+                        # GUI utilities
+                        baobab
+                        seahorse
+                    ]
+                    ++ (with nixpkgs.legacyPackages.x86_64-linux; [
                         starship
                         neovim
 
@@ -137,7 +141,7 @@ in
                         inotify-tools
 
                         clang-tools # For `clangd`.
-                ]);
+                    ]);
                 # ++ (if config.wsl.enable then [ wslu ] else [ ]);
 
                 programs.starship = import ../../common/starship.nix;
@@ -180,7 +184,9 @@ in
 
                 programs.tmux = import ../../common/tmux.nix (args // { minimal = false; });
 
-                home.file.".config/nvim" = lib.mkIf (cfg.trackedNeovimConfig) { source = nvim-config; };
+                home.file.".config/nvim" = lib.mkIf (cfg.trackedNeovimConfig) {
+                    source = nvim-config;
+                };
                 home.file.".config/gdb".source = dotfiles + "/.config/gdb";
 
                 # programs.neovim = {

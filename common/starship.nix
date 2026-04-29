@@ -6,7 +6,7 @@
 
         character.success_symbol = "[\\$](bold green)";
 
-        directory =  {
+        directory = {
             truncation_length = 5;
             truncation_symbol = ".../";
             style = "bold lavender";
