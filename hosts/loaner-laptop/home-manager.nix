@@ -121,6 +121,9 @@ in
                         seahorse
 
                         neovim
+
+                        # Miscellaneous
+                        openvpn
                     ]
                     ++ (if config.wsl.enable then [ (import ../../pkgs/wslu/package.nix args) ] else [ ]);
 
