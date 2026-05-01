@@ -57,6 +57,12 @@
                 ];
             };
 
+            nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                specialArgs = { inherit inputs; };
+                modules = [ ./hosts/laptop/configuration.nix ];
+            };
+
             nixosConfigurations.router = nixos-raspberrypi.lib.nixosSystem {
                 specialArgs = {
                     inherit nixos-raspberrypi;

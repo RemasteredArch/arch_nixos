@@ -25,6 +25,12 @@ let
         rev = "e2fe65d112db7228e1b1202994eb054506ba1f0b";
         sha256 = "sha256-SuGCJgA1e4PZFIXCSj+Ehxy5RDZzmK0iS3cWIXyYO0E=";
     };
+    wezterm-config = lib.mkIf (cfg.trackedWezTermConfig) pkgs.fetchFromGitHub {
+        owner = "RemasteredArch";
+        repo = "wezterm_config";
+        rev = "d8bdf369e8ffda8ce65327e9e06a70835061e0fd";
+        sha256 = "sha256-0iGBwux44NBkXNmxeyOTTD1Dwsx/uvpOYXPCNfKYMJM=";
+    };
 in
 {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
@@ -40,6 +46,25 @@ in
             '';
             default = true;
         };
+        trackedWezTermConfig = lib.mkOption {
+            type = lib.types.bool;
+            description = ''
+                Whether or not to fetch a tracked WezTerm configuration from Git.
+                If this is set to `false`, no WezTerm configuration will be used at all,
+                and you'll have to bring your own.
+            '';
+            default = cfg.desktop;
+        };
+        desktop = lib.mkOption {
+            type = lib.types.bool;
+            description = ''
+                Whether or not this is targeted towards a device with a graphical desktop.
+                Enable this installs and configures more graphical software.
+                Disabling this does not disable all graphical software,
+                as the intended target here is for WSL installs, which can use graphical software.
+            '';
+            default = false;
+        };
     };
 
     config = lib.mkIf cfg.enable {
@@ -51,6 +76,15 @@ in
         home-manager.extraSpecialArgs = {
             nixpkgs = inputs.nixpkgs;
         };
+
+        # Allow specific unfree packages to be installed.
+        #
+        # <https://nixos.wiki/wiki/Unfree_Software>
+        nixpkgs.config.allowUnfreePredicate =
+            pkg:
+            builtins.elem (lib.getName pkg) [
+                "discord"
+            ];
 
         home-manager.users.arch =
             { nixpkgs, ... }:
@@ -146,12 +180,25 @@ in
                         baobab
                         seahorse
 
-                        neovim
-
                         # Miscellaneous
                         openvpn
                     ]
-                    ++ (if config.wsl.enable then [ (import ../../pkgs/wslu/package.nix args) ] else [ ]);
+                    ++ (if config.wsl.enable then [ (import ../../pkgs/wslu/package.nix args) ] else [ ])
+                    ++ (
+                        if cfg.desktop then
+                            with packages;
+                            [
+                                brave
+                                discord # Installing Discord from Nixpkgs disables Krisp.
+                                gimp
+                                onlyoffice-desktopeditors
+                                rpi-imager
+                                vlc
+                                wezterm
+                            ]
+                        else
+                            [ ]
+                    );
 
                 programs.starship = import ../../common/starship.nix;
 
@@ -195,6 +242,9 @@ in
 
                 home.file.".config/nvim" = lib.mkIf (cfg.trackedNeovimConfig) {
                     source = nvim-config;
+                };
+                home.file.".config/wezterm" = lib.mkIf (cfg.trackedWezTermConfig) {
+                    source = wezterm-config;
                 };
                 home.file.".config/gdb".source = dotfiles + "/.config/gdb";
 
@@ -312,6 +362,49 @@ in
                         theme[process_mid]="#b4befe"
                         theme[process_end]="#cba6f7"
                     '';
+                };
+
+                # I don't use Firefox on a daily basis, so something minimal like this is fine.
+                programs.firefox = lib.mkIf cfg.desktop {
+                    enable = true;
+                    languagePacks = [ "en-US" ];
+                    # <https://firefox-admin-docs.mozilla.org/reference/policies/>
+                    policies = {
+                        DisplayBookmarksToolbar = "never";
+                        NoDefaultBookmarks = true;
+                        GenerativeAI = {
+                            Enabled = false;
+                            Locked = true;
+                        };
+                        DisableAppUpdate = true;
+                        ExtensionSettings = {
+                            "uBlock0@raymondhill.net" = {
+                                default_area = "menupanel";
+                                install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+                                installation_mode = "force_installed";
+                                private_browsing = true;
+                            };
+                        };
+                        SearchEngines.Default = "DuckDuckGo";
+                        FirefoxSuggest = {
+                            # Also disable other forms of Firefox Suggest.
+                            WebSuggestions = false;
+                            Locked = true;
+                        };
+                        DontCheckDefaultBrowser = true;
+                        FirefoxHome = {
+                            Search = false;
+                            TopSites = false;
+                            SponsoredTopSites = false;
+                            Highlights = false;
+                            Pocket = false;
+                            Stories = false;
+                            SponsoredPocket = false;
+                            SponsoredStories = false;
+                            Snippets = false;
+                            Locked = true;
+                        };
+                    };
                 };
 
                 # The state version is required and should stay at the version you
