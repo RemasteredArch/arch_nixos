@@ -19,6 +19,7 @@
 ### `loaner-laptop`, `laptop`, and `server`
 
 > [!WARNING]
+>
 > I haven't actually done a fresh install on any of my hosts since switching to flakes,
 > so this may be subtly wrong.
 
