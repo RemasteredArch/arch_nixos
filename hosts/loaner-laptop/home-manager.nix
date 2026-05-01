@@ -27,7 +27,7 @@ let
     };
 in
 {
-    # imports = [ home-manager.nixosModules.home-manager ];
+    imports = [ inputs.home-manager.nixosModules.home-manager ];
 
     options.services.arch-home-manager = {
         enable = lib.mkEnableOption "`arch` home-manager configuration";

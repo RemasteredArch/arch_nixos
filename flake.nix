@@ -44,9 +44,7 @@
                 modules = [
                     ./hosts/loaner-laptop/default.nix
 
-                    nixvim.nixosModules.nixvim
                     nixos-wsl.nixosModules.default
-                    home-manager.nixosModules.home-manager
                     {
                         wsl = {
                             enable = true;

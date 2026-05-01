@@ -10,9 +10,7 @@ let
     packages = inputs.nixpkgs.legacyPackages.x86_64-linux;
 in
 {
-    # imports = [
-    #     nixvim.nixosModules.nixvim
-    # ];
+    imports = [ inputs.nixvim.nixosModules.nixvim ];
 
     programs.nixvim = {
         enable = true;
