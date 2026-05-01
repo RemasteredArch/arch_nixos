@@ -12,6 +12,10 @@
     See [`f1a8503`](https://github.com/RemasteredArch/arch_nixos/commit/f1a8503)
     for more details on the matter.
 - `hosts/laptop/`: the graphical NixOS instance that will eventually run on my laptop.
+  - > [!WARNING]
+    >
+    > Hibernation support depends upon the swap partition being large enough to fit memory.
+    > Adjust the `swapSize` parameter of `hosts/laptop/disko.nix` if your target has >16 GiB of RAM.
 - `hosts/router/`: my router, a Raspberry Pi 5.
 
 ## Setup
@@ -22,6 +26,7 @@
 >
 > I haven't actually done a fresh install on any of my hosts since switching to flakes,
 > so this may be subtly wrong.
+> In particular, I'm not sure how disko (used by `laptop`) wants to be activated.
 
 ```sh
 conf_dir="$HOME/dev/arch_nixos" # Or wherever else you want to put it.
