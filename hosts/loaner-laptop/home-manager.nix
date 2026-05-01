@@ -67,6 +67,32 @@ in
                         # I'll move them when I actually get around to using them.
                         act
                         gdb
+                        (neovim.overrideAttrs (prevAttrs: {
+                            runtimeDeps = with packages; [
+                                gcc
+                                gnumake
+                                go
+                                nodejs_24
+                                python3
+                                unzip
+
+                                silicon
+                                wl-clipboard
+                                nerd-fonts.caskaydia-cove
+                                noto-fonts-color-emoji
+
+                                cmake
+                                javaPackages.compiler.openjdk25
+                                tree-sitter
+                                python3Packages.pip # Not actually used by Mason :/
+
+                                # Optional performance improvements.
+                                fd
+                                inotify-tools
+
+                                clang-tools # For `clangd`.
+                            ];
+                        }))
                         rustup
                         shellcheck
 
@@ -171,30 +197,6 @@ in
                     source = nvim-config;
                 };
                 home.file.".config/gdb".source = dotfiles + "/.config/gdb";
-
-                programs.neovim.extraPackages = with packages; [
-                    gcc
-                    gnumake
-                    go
-                    nodejs_24
-                    python3
-                    unzip
-
-                    silicon
-                    wl-clipboard
-                    nerd-fonts.caskaydia-cove
-                    noto-fonts-color-emoji
-
-                    cmake
-                    javaPackages.compiler.openjdk25
-                    tree-sitter
-
-                    # Optional performance improvements.
-                    fd
-                    inotify-tools
-
-                    clang-tools # For `clangd`.
-                ];
 
                 programs.git = {
                     enable = true;
