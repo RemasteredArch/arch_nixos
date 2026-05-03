@@ -19,18 +19,26 @@ let
         rev = "6563a56525a6fd42d998b0314447de261d844428";
         sha256 = "sha256-GEsj0V1vHCpxcncuCOG4Oa5NTWcAlH2ggMFG9B0od7Q=";
     };
-    nvim-config = lib.mkIf (cfg.trackedNeovimConfig) pkgs.fetchFromGitHub {
-        owner = "RemasteredArch";
-        repo = "nvim-config";
-        rev = "e2fe65d112db7228e1b1202994eb054506ba1f0b";
-        sha256 = "sha256-SuGCJgA1e4PZFIXCSj+Ehxy5RDZzmK0iS3cWIXyYO0E=";
-    };
-    wezterm-config = lib.mkIf (cfg.trackedWezTermConfig) pkgs.fetchFromGitHub {
-        owner = "RemasteredArch";
-        repo = "wezterm_config";
-        rev = "d8bdf369e8ffda8ce65327e9e06a70835061e0fd";
-        sha256 = "sha256-0iGBwux44NBkXNmxeyOTTD1Dwsx/uvpOYXPCNfKYMJM=";
-    };
+    nvim-config =
+        if cfg.trackedNeovimConfig then
+            pkgs.fetchFromGitHub {
+                owner = "RemasteredArch";
+                repo = "nvim-config";
+                rev = "e2fe65d112db7228e1b1202994eb054506ba1f0b";
+                sha256 = "sha256-SuGCJgA1e4PZFIXCSj+Ehxy5RDZzmK0iS3cWIXyYO0E=";
+            }
+        else
+            "";
+    wezterm-config =
+        if cfg.trackedWezTermConfig then
+            pkgs.fetchFromGitHub {
+                owner = "RemasteredArch";
+                repo = "wezterm_config";
+                rev = "d8bdf369e8ffda8ce65327e9e06a70835061e0fd";
+                sha256 = "sha256-0iGBwux44NBkXNmxeyOTTD1Dwsx/uvpOYXPCNfKYMJM=";
+            }
+        else
+            "";
 in
 {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
@@ -265,12 +273,12 @@ in
 
                 programs.tmux = import ../../common/tmux.nix (args // { minimal = false; });
 
-                home.file.".config/nvim" = lib.mkIf (cfg.trackedNeovimConfig) {
+                home.file.".config/nvim" = lib.mkIf cfg.trackedNeovimConfig {
                     source = nvim-config;
                 };
-                # home.file.".config/wezterm" = lib.mkIf (cfg.trackedWezTermConfig) {
-                #     source = wezterm-config;
-                # };
+                home.file.".config/wezterm" = lib.mkIf cfg.trackedWezTermConfig {
+                    source = wezterm-config;
+                };
                 home.file.".config/gdb".source = dotfiles + "/.config/gdb";
 
                 programs.git = {
