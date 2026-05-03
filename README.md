@@ -4,29 +4,31 @@
 
 ## Hosts
 
+> [!WARNING]
+>
+> I frequently make changes to hosts without testing whilst working on other hosts.
+> At any given point in time, a host may be completely or subtly broken.
+>
+> As of right now, I'm especially uncertain of my installation instructions
+> and I expect that the `server` host is completely broken.
+
 - `hosts/server/`: my home server.
-  - This was not included in my recent switch to flakes so it is undoubtedly broken,
-    but fixing that is not a priority for me right now.
 - `hosts/loaner-laptop/`: the NixOS-WSL instance running on my current laptop.
   - Note that the flake output for this is named `wsl`, not `loaner-laptop`.
     See [`f1a8503`](https://github.com/RemasteredArch/arch_nixos/commit/f1a8503)
     for more details on the matter.
 - `hosts/laptop/`: the graphical NixOS instance that will eventually run on my laptop.
-  - > [!WARNING]
-    >
-    > Hibernation support depends upon the swap partition being large enough to fit memory.
-    > Adjust the `swapSize` parameter of `hosts/laptop/disko.nix` if your target has >16 GiB of RAM.
+  - This host installs two unfree packages
+    (though adding more is not considered a breaking change):
+    Discord and Microsoft's Core Fonts for the Web.
+    You can find the EULA for the latter [here](https://corefonts.sourceforge.net/eula.htm).
+  - This host uses hibernation, which means that **swap must be at least as large as memory**.
+    Adjust the `swapSize` variable in `hosts/laptop/disko.nix` if your target has >16 GiB of RAM.
 - `hosts/router/`: my router, a Raspberry Pi 5.
 
 ## Setup
 
 ### `loaner-laptop`, `laptop`, and `server`
-
-> [!WARNING]
->
-> I haven't actually done a fresh install on any of my hosts since switching to flakes,
-> so this may be subtly wrong.
-> In particular, I'm not sure how disko (used by `laptop`) wants to be activated.
 
 ```sh
 conf_dir="$HOME/dev/arch_nixos" # Or wherever else you want to put it.
