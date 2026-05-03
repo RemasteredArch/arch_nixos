@@ -98,6 +98,7 @@ in
             builtins.elem (lib.getName pkg) [
                 # Add additional package names here
                 "discord"
+                "corefonts"
             ];
 
         fonts = lib.mkIf cfg.desktop {
@@ -105,6 +106,9 @@ in
                 newcomputermodern
                 ibm-plex
                 nerd-fonts.caskaydia-cove
+
+                # Unfree packages.
+                corefonts
             ];
             # Some safe default fonts.
             enableDefaultPackages = true;
@@ -214,13 +218,15 @@ in
                             with pkgs;
                             [
                                 brave
-                                discord # Installing Discord from Nixpkgs disables Krisp.
                                 gimp
                                 onlyoffice-desktopeditors
                                 obs-studio
                                 rpi-imager
                                 vlc
                                 wezterm
+
+                                # Unfree packages.
+                                discord # Installing Discord from Nixpkgs disables Krisp.
                             ]
                         else
                             [ ]
