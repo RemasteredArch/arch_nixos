@@ -6,9 +6,6 @@
     ...
 }:
 
-let
-    packages = inputs.nixpkgs.legacyPackages.x86_64-linux;
-in
 {
     imports = [ inputs.nixvim.nixosModules.nixvim ];
 
@@ -87,7 +84,7 @@ in
                 # folding = true;
                 folding.enable = true;
 
-                grammarPackages = with packages.vimPlugins.nvim-treesitter.builtGrammars; [
+                grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
                     caddy
                     cmake
                     cpp

@@ -8,6 +8,7 @@ args@{
 
 let
     cfg = config.services.arch-home-manager;
+    util = import ../../common/util.nix { inherit pkgs; };
     colors = {
         reset = "\\e[0m";
         bold = "\\e[1m";
@@ -88,10 +89,6 @@ in
         home-manager.useGlobalPkgs = true;
         # What does this do?
         home-manager.useUserPackages = true;
-        # What exactly does this do?
-        home-manager.extraSpecialArgs = {
-            nixpkgs = inputs.nixpkgs;
-        };
 
         # # Allow specific unfree packages to be installed.
         # #
@@ -114,17 +111,13 @@ in
         };
 
         home-manager.users.arch =
-            { nixpkgs, ... }:
-            let
-                packages = nixpkgs.legacyPackages.x86_64-linux;
-                util = import ../../common/util.nix { pkgs = packages; };
-            in
+            { ... }:
             {
                 # Probably not necessary.
                 fonts.fontconfig.enable = lib.mkIf cfg.desktop true;
 
                 home.packages =
-                    with packages;
+                    with pkgs;
                     [
                         # Development tools.
                         #
@@ -218,7 +211,7 @@ in
                     ++ (if cfg.wsl then [ (import ../../pkgs/wslu/package.nix args) ] else [ ])
                     ++ (
                         if cfg.desktop then
-                            with packages;
+                            with pkgs;
                             [
                                 brave
                                 # discord # Installing Discord from Nixpkgs disables Krisp.

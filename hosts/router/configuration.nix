@@ -3,12 +3,10 @@
     nixpkgs,
     nixos-raspberrypi,
     disko,
+    pkgs,
     ...
 }:
 
-let
-    pkgs = nixos-raspberrypi.legacyPackages.aarch64-linux;
-in
 {
     imports = [
         ./networking.nix

@@ -13,9 +13,6 @@ args@{
     ...
 }:
 
-let
-    packages = inputs.nixpkgs.legacyPackages.x86_64-linux;
-in
 {
     imports = [
         ../../common/neovim-minimal.nix
@@ -69,7 +66,7 @@ in
 
     programs.nix-ld = {
         enable = true;
-        libraries = with packages; [
+        libraries = with pkgs; [
             zlib
             zstd
             stdenv.cc.cc
@@ -99,10 +96,10 @@ in
     environment.sessionVariables.SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
     programs.gnupg.agent = {
         enable = true;
-        pinentryPackage = packages.pinentry-curses;
+        pinentryPackage = pkgs.pinentry-curses;
     };
 
-    environment.systemPackages = with packages; [
+    environment.systemPackages = with pkgs; [
         man
 
         vim
