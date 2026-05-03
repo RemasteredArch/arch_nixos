@@ -12,6 +12,10 @@
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        disko = {
+            url = "github:nix-community/disko";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
 
         nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
         nixpkgs-rpi.follows = "nixos-raspberrypi/nixpkgs";
@@ -28,6 +32,7 @@
             nixos-wsl,
             nixvim,
             home-manager,
+            disko,
 
             nixos-raspberrypi,
             nixpkgs-rpi,

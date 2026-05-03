@@ -11,6 +11,7 @@ let
 in
 {
     imports = [
+        ./disko.nix
         ../loaner-laptop/default.nix
         ./hibernation.nix
     ];
