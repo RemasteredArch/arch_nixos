@@ -6,15 +6,20 @@ args@{
     ...
 }:
 
-let
-    packages = inputs.nixpkgs.legacyPackages.x86_64-linux;
-in
 {
     imports = [
         ./disko.nix
         ../loaner-laptop/default.nix
         ./hibernation.nix
     ];
+
+    networking.hostName = "laptop";
+
+    boot.plymouth = {
+        enable = true;
+        theme = "blahaj";
+        themePackages = with pkgs; [ plymouth-blahaj-theme ];
+    };
 
     # Use zswap, an alternative to zram that caches and compresses swap from disk, rather than
     # compressing memory to an in-memory block device.
