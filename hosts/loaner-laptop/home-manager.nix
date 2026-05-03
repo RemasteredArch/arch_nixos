@@ -90,6 +90,7 @@ in
             { nixpkgs, ... }:
             let
                 packages = nixpkgs.legacyPackages.x86_64-linux;
+                util = import ../../common/util.nix { pkgs = packages; };
             in
             {
                 home.packages =
@@ -102,7 +103,7 @@ in
                         act
                         gdb
                         (neovim.overrideAttrs (prevAttrs: {
-                            runtimeDeps = with packages; [
+                            runtimeDeps = prevAttrs.runtimeDeps ++ [
                                 gcc
                                 gnumake
                                 go
@@ -110,10 +111,11 @@ in
                                 python3
                                 unzip
 
-                                silicon
                                 wl-clipboard
-                                nerd-fonts.caskaydia-cove
-                                noto-fonts-color-emoji
+                                (util.withFonts silicon [
+                                    nerd-fonts.caskaydia-cove
+                                    noto-fonts-color-emoji
+                                ])
 
                                 cmake
                                 javaPackages.compiler.openjdk25
