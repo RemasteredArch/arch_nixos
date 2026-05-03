@@ -65,7 +65,10 @@
             nixosConfigurations.laptop = inputs.nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = { inherit inputs; };
-                modules = [ ./hosts/laptop/configuration.nix ];
+                modules = [
+                    ./hosts/laptop/vm.nix
+                    ./hosts/laptop/configuration.nix
+                ];
             };
 
             nixosConfigurations.router = nixos-raspberrypi.lib.nixosSystem {

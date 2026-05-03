@@ -1,1 +1,2 @@
-/configuration.nix
+vm/boot.raw
+vm/result

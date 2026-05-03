@@ -1,11 +1,13 @@
 {
     inputs,
+    ...
+}:
+let
     # Must be large enough to fit system memory for hibernation.
     #
     # This laptop has 16 GiB of RAM, so 18 GiB seems like a safe buffer.
-    swapSize ? "18G",
-    ...
-}:
+    swapSize = "18G";
+in
 {
     imports = [ inputs.disko.nixosModules.disko ];
 

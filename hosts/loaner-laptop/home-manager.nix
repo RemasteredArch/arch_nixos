@@ -85,14 +85,15 @@ in
             nixpkgs = inputs.nixpkgs;
         };
 
-        # Allow specific unfree packages to be installed.
-        #
-        # <https://nixos.wiki/wiki/Unfree_Software>
-        nixpkgs.config.allowUnfreePredicate =
-            pkg:
-            builtins.elem (lib.getName pkg) [
-                "discord"
-            ];
+        # # Allow specific unfree packages to be installed.
+        # #
+        # # <https://nixos.wiki/wiki/Unfree_Software>
+        # nixpkgs.config.allowUnfreePredicate =
+        #     pkg:
+        #     builtins.elem (lib.getName pkg) [
+        #         # Add additional package names here
+        #         "discord"
+        #     ];
 
         home-manager.users.arch =
             { nixpkgs, ... }:
@@ -199,7 +200,7 @@ in
                             with packages;
                             [
                                 brave
-                                discord # Installing Discord from Nixpkgs disables Krisp.
+                                # discord # Installing Discord from Nixpkgs disables Krisp.
                                 gimp
                                 onlyoffice-desktopeditors
                                 rpi-imager
@@ -253,9 +254,9 @@ in
                 home.file.".config/nvim" = lib.mkIf (cfg.trackedNeovimConfig) {
                     source = nvim-config;
                 };
-                home.file.".config/wezterm" = lib.mkIf (cfg.trackedWezTermConfig) {
-                    source = wezterm-config;
-                };
+                # home.file.".config/wezterm" = lib.mkIf (cfg.trackedWezTermConfig) {
+                #     source = wezterm-config;
+                # };
                 home.file.".config/gdb".source = dotfiles + "/.config/gdb";
 
                 programs.git = {
@@ -378,6 +379,7 @@ in
                 programs.firefox = lib.mkIf cfg.desktop {
                     enable = true;
                     languagePacks = [ "en-US" ];
+                    configPath = "~/.config/mozilla/firefox";
                     # <https://firefox-admin-docs.mozilla.org/reference/policies/>
                     policies = {
                         DisplayBookmarksToolbar = "never";

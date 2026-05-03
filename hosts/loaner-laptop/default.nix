@@ -33,6 +33,8 @@ in
 
     users.users.arch = {
         isNormalUser = true;
+        initialPassword = "callslikecalls";
+        extraGroups = [ "wheel" ];
     };
 
     services.arch-home-manager = {

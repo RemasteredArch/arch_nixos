@@ -13,7 +13,7 @@
     # Define time delay for hibernation.
     #
     # See <https://www.mankier.com/5/systemd-sleep.conf#Options>.
-    systemd.sleep.settings = {
+    systemd.sleep.settings.Sleep = {
         # Hibernate after being asleep for thirty minutes (or after dipping below 5% battery).
         HibernateDelaySec = "30m";
 
