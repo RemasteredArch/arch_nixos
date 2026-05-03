@@ -90,15 +90,15 @@ in
         # What does this do?
         home-manager.useUserPackages = true;
 
-        # # Allow specific unfree packages to be installed.
-        # #
-        # # <https://nixos.wiki/wiki/Unfree_Software>
-        # nixpkgs.config.allowUnfreePredicate =
-        #     pkg:
-        #     builtins.elem (lib.getName pkg) [
-        #         # Add additional package names here
-        #         "discord"
-        #     ];
+        # Allow specific unfree packages to be installed.
+        #
+        # <https://nixos.wiki/wiki/Unfree_Software>
+        nixpkgs.config.allowUnfreePredicate =
+            pkg:
+            builtins.elem (lib.getName pkg) [
+                # Add additional package names here
+                "discord"
+            ];
 
         fonts = lib.mkIf cfg.desktop {
             packages = with pkgs; [
@@ -214,7 +214,7 @@ in
                             with pkgs;
                             [
                                 brave
-                                # discord # Installing Discord from Nixpkgs disables Krisp.
+                                discord # Installing Discord from Nixpkgs disables Krisp.
                                 gimp
                                 onlyoffice-desktopeditors
                                 obs-studio
