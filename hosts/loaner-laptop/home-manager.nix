@@ -95,6 +95,16 @@ in
         #         "discord"
         #     ];
 
+        fonts = lib.mkIf cfg.desktop {
+            packages = with pkgs; [
+                newcomputermodern
+                ibm-plex
+                nerd-fonts.caskaydia-cove
+            ];
+            # Some safe default fonts.
+            enableDefaultPackages = true;
+        };
+
         home-manager.users.arch =
             { nixpkgs, ... }:
             let
@@ -102,6 +112,9 @@ in
                 util = import ../../common/util.nix { pkgs = packages; };
             in
             {
+                # Probably not necessary.
+                fonts.fontconfig.enable = lib.mkIf cfg.desktop true;
+
                 home.packages =
                     with packages;
                     [
@@ -203,6 +216,7 @@ in
                                 # discord # Installing Discord from Nixpkgs disables Krisp.
                                 gimp
                                 onlyoffice-desktopeditors
+                                obs-studio
                                 rpi-imager
                                 vlc
                                 wezterm
