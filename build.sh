@@ -27,11 +27,10 @@ EOF
 }
 
 function build_vm() {
+    # Give users live progress updates. Very nice for such a long build.
     set -x
 
-    local vm_dir="$root_dir/vm"
-    [ -d "$vm_dir" ] || mkdir "$vm_dir"
-    cd "$vm_dir"
+    cd "$root_dir/vm"
 
     # This takes around fifteen minutes on my laptop.
     if [ "${1:-}" != '--no-build' ]; then
