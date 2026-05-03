@@ -22,7 +22,6 @@ in
         ./home-manager.nix
     ];
 
-    wsl.enable = lib.mkDefault false; # To allow conditionals that don't fail on a missing key.
     boot.binfmt = {
         # Prefer to statically load the emulators into the Kernel to support Docker.
         preferStaticEmulators = true;

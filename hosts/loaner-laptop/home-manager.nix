@@ -55,11 +55,19 @@ in
             '';
             default = cfg.desktop;
         };
+        wsl = lib.mkOption {
+            type = lib.types.bool;
+            description = ''
+                Whether or not this is targeted towards a NixOS-WSL install.
+                Enabling this installs and configures WSL-related software.
+            '';
+            default = config ? wsl && config.wsl ? enable && config.wsl.enable;
+        };
         desktop = lib.mkOption {
             type = lib.types.bool;
             description = ''
                 Whether or not this is targeted towards a device with a graphical desktop.
-                Enable this installs and configures more graphical software.
+                Enabling this installs and configures more graphical software.
                 Disabling this does not disable all graphical software,
                 as the intended target here is for WSL installs, which can use graphical software.
             '';
@@ -185,7 +193,7 @@ in
                         # Miscellaneous
                         openvpn
                     ]
-                    ++ (if config.wsl.enable then [ (import ../../pkgs/wslu/package.nix args) ] else [ ])
+                    ++ (if cfg.wsl then [ (import ../../pkgs/wslu/package.nix args) ] else [ ])
                     ++ (
                         if cfg.desktop then
                             with packages;
