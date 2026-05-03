@@ -33,8 +33,8 @@ in
     boot.zswap.enable = true;
 
     # Use GNOME.
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+    services.displayManager.gdm.enable = true;
+    services.desktopManager.gnome.enable = true;
     # Configure more graphical things.
     services.arch-home-manager.desktop = true;
 }
