@@ -142,9 +142,10 @@ in
                 [
                     brave
                     gimp
-                    onlyoffice-desktopeditors
                     obs-studio
+                    onlyoffice-desktopeditors
                     rpi-imager
+                    unison
                     vlc
                     wezterm
 
