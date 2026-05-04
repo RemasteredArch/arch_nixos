@@ -172,3 +172,5 @@ This project, does, however, include code from other projects:
   See that file for more details.
 - `pkgs/wslu/fallback-conf-nix-store.diff` contains a patch of code license `GPL-3.0-or-later`.
   See [wslu](https://github.com/wslutilities/wslu) for more details.
+- `vm/qemu.nix` contains MIT code from [disko](https://github.com/nix-community/disko).
+  See that file for more details.
