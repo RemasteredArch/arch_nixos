@@ -40,6 +40,21 @@ args@{
     # Use GNOME.
     services.displayManager.gdm.enable = true;
     services.desktopManager.gnome.enable = true;
+    programs.dconf.profiles.user.databases = [
+        {
+            settings = {
+                "org/gnome/mutter" = {
+                    experimental-features = [
+                        "scale-monitor-framebuffer" # Fractional scaling
+                        "variable-refresh-rate" # VRR (for compatible displays)
+                        "xwayland-native-scaling" # Crisp scaling for Xwayland applications
+                        "autoclose-xwayland" # Automatically close Xwayland if there are no clients
+                    ];
+                };
+            };
+        }
+    ];
+
     # Configure more graphical things.
     services.arch-home-manager.desktop = true;
 }
