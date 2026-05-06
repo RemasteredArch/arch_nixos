@@ -9,12 +9,11 @@ args@{
 {
     imports = [
         ./disko.nix
+        ./networking.nix
         ../loaner-laptop/default.nix
         ./hibernation.nix
         ./hardware-configuration.nix
     ];
-
-    networking.hostName = "laptop";
 
     boot.loader = {
         systemd-boot.enable = true;
