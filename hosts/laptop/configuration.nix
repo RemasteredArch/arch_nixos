@@ -11,9 +11,15 @@ args@{
         ./disko.nix
         ../loaner-laptop/default.nix
         ./hibernation.nix
+        ./hardware-configuration.nix
     ];
 
     networking.hostName = "laptop";
+
+    boot.loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+    };
 
     boot.plymouth = {
         enable = true;

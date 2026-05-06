@@ -58,6 +58,10 @@ in
         # What does this do?
         home-manager.useUserPackages = true;
 
+        home-manager.extraSpecialArgs = {
+            inherit cfg;
+        };
+
         # Allow specific unfree packages to be installed.
         #
         # <https://nixos.wiki/wiki/Unfree_Software>
@@ -83,6 +87,6 @@ in
             enableDefaultPackages = true;
         };
 
-        home-manager.users.arch = import ../../common/interative/home.nix;
+        home-manager.users.arch = import ./arch-home.nix;
     };
 }

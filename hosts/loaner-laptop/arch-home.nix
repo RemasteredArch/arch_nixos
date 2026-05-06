@@ -3,10 +3,10 @@ args@{
     lib,
     pkgs,
     inputs,
+    cfg,
     ...
 }:
 let
-    cfg = config.services.arch-home-manager;
     util = import ../../common/util.nix { inherit pkgs; };
     colors = {
         reset = "\\e[0m";
