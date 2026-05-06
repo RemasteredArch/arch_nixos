@@ -26,6 +26,10 @@ args@{
         themePackages = with pkgs; [ plymouth-blahaj-theme ];
     };
 
+    time.timeZone = "America/Los_Angeles";
+    i18n.defaultLocale = "en_US.UTF-8";
+    services.xserver.xkb.layout = "us";
+
     # Use zswap, an alternative to zram that caches and compresses swap from disk, rather than
     # compressing memory to an in-memory block device.
     #
