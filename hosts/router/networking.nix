@@ -24,7 +24,7 @@
     services.avahi.enable = true;
 
     networking = {
-        hostName = "router";
+        hostName = "arch-router";
 
         # IPv6 is a myth invented by big IANA to scare you into using DHCP!
         enableIPv6 = false;
