@@ -148,6 +148,7 @@ in
                     unison
                     vlc
                     wezterm
+                    wl-clipboard
 
                     # Unfree packages.
                     discord # Installing Discord from Nixpkgs disables Krisp.
