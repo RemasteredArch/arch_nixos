@@ -156,6 +156,20 @@ in
                 [ ]
         );
 
+    programs.ghostty = lib.mkIf cfg.desktop {
+        enable = true;
+        package = pkgs.ghostty;
+        enableBashIntegration = true;
+        settings = {
+            font-family = "CaskaydiaCove NF";
+            font-size = 14;
+            theme = "dark:Catppuccin Mocha,light:Catppuccin Latte";
+            keybind = [
+                "ctrl+v=paste_from_clipboard"
+            ];
+        };
+    };
+
     programs.starship = import ../../common/starship.nix;
 
     programs.bash = {
@@ -193,6 +207,7 @@ in
             bell-style = "none";
         };
     };
+    xdg.enable = true;
 
     programs.tmux = import ../../common/tmux.nix (args // { minimal = false; });
 

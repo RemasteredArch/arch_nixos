@@ -71,9 +71,10 @@ in
 
         fonts = lib.mkIf cfg.desktop {
             packages = with pkgs; [
-                newcomputermodern
+                cascadia-code
                 ibm-plex
                 nerd-fonts.caskaydia-cove
+                newcomputermodern
 
                 # Unfree packages.
                 corefonts
