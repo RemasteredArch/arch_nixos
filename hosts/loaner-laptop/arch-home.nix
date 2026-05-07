@@ -166,6 +166,8 @@ in
             font-family = "CaskaydiaCove NF";
             font-size = 14;
             theme = "dark:Catppuccin Mocha,light:Catppuccin Latte";
+            window-inherit-working-directory = false;
+            tab-inherit-working-directory = false;
             keybind = [
                 "ctrl+v=paste_from_clipboard"
             ];
