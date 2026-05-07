@@ -53,6 +53,7 @@ in
             # them when I actually get around to using them.
             act
             gdb
+            hyperfine
             (neovim.overrideAttrs (prevAttrs: {
                 runtimeDeps = prevAttrs.runtimeDeps ++ [
                     gcc
