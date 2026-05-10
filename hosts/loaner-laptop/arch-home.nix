@@ -168,8 +168,10 @@ in
             theme = "dark:Catppuccin Mocha,light:Catppuccin Latte";
             window-inherit-working-directory = false;
             tab-inherit-working-directory = false;
+            window-theme = "ghostty";
             keybind = [
                 "ctrl+v=paste_from_clipboard"
+                "f11=toggle_fullscreen"
             ];
         };
     };
