@@ -156,7 +156,8 @@ in
                 ]
             else
                 [ ]
-        );
+        )
+        ++ import ../../common/package-sets/c-devel.nix args;
 
     programs.ghostty = lib.mkIf cfg.desktop {
         enable = true;
