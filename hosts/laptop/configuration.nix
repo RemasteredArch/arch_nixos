@@ -65,8 +65,15 @@ args@{
                         "autoclose-xwayland" # Automatically close Xwayland if there are no clients
                     ];
                 };
+                "org/gnome/desktop/wm/keybindings" = {
+                    "<ALT>Tab" = "switch-windows";
+                };
             };
         }
+    ];
+    environment.gnome.excludePackages = with pkgs; [
+        epiphany
+        gnome-console
     ];
 
     # Configure more graphical things.
