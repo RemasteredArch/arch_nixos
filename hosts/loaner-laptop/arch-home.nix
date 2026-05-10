@@ -246,7 +246,10 @@ in
     # Copyright (c) 2024 Catppuccin
     programs.btop = {
         enable = true;
-        settings.color_theme = "catppuccin_mocha";
+        settings = {
+            color_theme = "catppuccin_mocha";
+            update_ms = 200;
+        };
         themes.catppuccin_mocha = ''
             # Main background, empty for terminal default, need to be empty if you want transparent background
             theme[main_bg]="#1e1e2e"
