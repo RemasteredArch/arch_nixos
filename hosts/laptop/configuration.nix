@@ -15,6 +15,11 @@ args@{
         ./hardware-configuration.nix
     ];
 
+    services.laptop.networking = {
+        enable = true;
+        configureUsbEthernet = false;
+    };
+
     boot.loader = {
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
