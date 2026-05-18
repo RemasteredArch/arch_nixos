@@ -54,6 +54,9 @@ args@{
     # Use GNOME.
     services.displayManager.gdm.enable = true;
     services.desktopManager.gnome.enable = true;
+    environment.systemPackages = with pkgs.gnomeExtensions; [
+        appindicator
+    ];
     programs.dconf.profiles.user.databases = [
         {
             settings = {
@@ -67,6 +70,13 @@ args@{
                 };
                 "org/gnome/desktop/wm/keybindings" = {
                     "<ALT>Tab" = "switch-windows";
+                };
+                "org/gnome/shell" = {
+                    disable-user-extensions = false;
+                    # Might not be necessary.
+                    disabled-extensions = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
+                    # Might not be necessary.
+                    enabled-extensions = [ "appindicatorsupport@rgcjonas.gmail.com" ];
                 };
             };
         }
