@@ -385,6 +385,26 @@ in
         };
     };
 
+    xdg.mimeApps = {
+        enable = true;
+        defaultApplications = lib.mkMerge [
+            { }
+            (lib.mkIf cfg.desktop (
+                let
+                    browser = "brave-browser.desktop";
+                in
+                {
+                    "text/markdown" = browser;
+                    "text/html" = browser;
+                    "x-scheme-handler/http" = browser;
+                    "x-scheme-handler/https" = browser;
+                    "x-scheme-handler/about" = browser;
+                    "x-scheme-handler/unknown" = browser;
+                }
+            ))
+        ];
+    };
+
     # The state version is required and should stay at the version you
     # originally installed.
     home.stateVersion = "25.11";
