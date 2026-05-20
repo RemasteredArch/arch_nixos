@@ -8,9 +8,12 @@
     # Recommended for new installations.
     boot.loader.raspberry-pi.bootloader = "kernel";
 
-    hardware.raspberry-pi.dt-param = {
+    hardware.raspberry-pi.config.all.base-dt-params = {
         # Assumes that your PSU is genuinely able to deliver 5 amps, despite what the Pi detects. Be
         # careful with this!
-        PSU_MAX_CURRENT = 5000;
+        PSU_MAX_CURRENT = {
+            enable = true;
+            value = 5000;
+        };
     };
 }
