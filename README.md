@@ -25,6 +25,9 @@
   - This host uses hibernation, which means that **swap must be at least as large as memory**.
     Adjust the `swapSize` variable in `hosts/laptop/disko.nix` if your target has >16 GiB of RAM.
 - `hosts/router/`: my router, a Raspberry Pi 5.
+  - This config assumes that you have a power supply that can provide 5A,
+    as this is [required by my PSU](<https://www.waveshare.com/wiki/PoE_HAT_(F)#Notes>).
+    **Be careful!**
 
 ## Setup
 
