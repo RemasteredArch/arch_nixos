@@ -70,11 +70,10 @@
         settings = {
             PermitRootLogin = "no";
             AllowUsers = [ "arch" ];
-
-            # Only trust SSH keys explicitly added by this configuration, not those found in
-            # `~/.ssh/authorized_keys`.
-            authorizedKeysInHomedir = false;
         };
+        # Only trust SSH keys explicitly added by this configuration, not those found in
+        # `~/.ssh/authorized_keys`.
+        authorizedKeysInHomedir = false;
     };
 
     services.fail2ban = {
