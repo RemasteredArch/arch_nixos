@@ -33,7 +33,7 @@
             zip
         ];
         openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINKSSO9Pg/bRzFb33fJr4MYbeq9HeNK5nGLJBndI5V/A SSH Login Key <81265470+RemasteredArch@users.noreply.github.com>"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKP5f8jfyl79+ta53BkUTZoMHxI8H0Dh+jsMW4lqp0BH arch@remasteredarch.net"
         ];
     };
 
@@ -70,6 +70,10 @@
         settings = {
             PermitRootLogin = "no";
             AllowUsers = [ "arch" ];
+
+            # Only trust SSH keys explicitly added by this configuration, not those found in
+            # `~/.ssh/authorized_keys`.
+            authorizedKeysInHomedir = false;
         };
     };
 
