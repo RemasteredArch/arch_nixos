@@ -42,7 +42,11 @@ in
                         ];
                     };
                     "org/gnome/desktop/wm/keybindings" = {
-                        "<ALT>Tab" = "switch-windows";
+                        switch-applications = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
+                        switch-applications-backward = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
+
+                        switch-windows = [ "<Alt>Tab" ];
+                        switch-windows-backward = [ "<Shift><Alt>Tab" ];
                     };
                     "org/gnome/shell" = {
                         disable-user-extensions = false;
