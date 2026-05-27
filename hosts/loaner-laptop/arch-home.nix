@@ -120,6 +120,7 @@ in
             # Fun
             fastfetch
             pfetch
+            sl
             toilet
 
             # Provides man pages for Linux and POSIX APIs.
