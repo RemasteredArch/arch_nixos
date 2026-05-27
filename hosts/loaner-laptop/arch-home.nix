@@ -118,7 +118,9 @@ in
             tealdeer
 
             # Fun
+            cowsay
             fastfetch
+            lolcat
             pfetch
             sl
             toilet
