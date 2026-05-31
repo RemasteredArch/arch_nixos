@@ -17,6 +17,9 @@ Usage:
             Builds the specified flake output and reconfigures
             the current NixOS install to its result.
 
+    $0 update
+            Updates the inputs of the flake.
+
     $0 help
             Prints this message.
 
@@ -62,6 +65,9 @@ case "$command" in
             exit 1
         }
         switch "$@"
+        ;;
+    update)
+        nix flake update
         ;;
     help)
         print_help
