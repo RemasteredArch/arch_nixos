@@ -146,6 +146,7 @@ in
                 with pkgs;
                 [
                     brave
+                    constrict
                     gimp
                     obs-studio
                     onlyoffice-desktopeditors
