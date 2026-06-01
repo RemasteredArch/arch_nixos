@@ -121,6 +121,7 @@ in
             cowsay
             fastfetch
             lolcat
+            onefetch
             pfetch
             sl
             toilet
