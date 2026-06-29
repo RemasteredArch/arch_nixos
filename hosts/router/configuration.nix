@@ -46,7 +46,6 @@
             "nix-command"
             "flakes"
         ];
-        trusted-users = [ "arch" ]; # TO-DO: remove, this grants passwordless `sudo`.
 
         extra-substituters = [ "https://nixos-raspberrypi.cachix.org" ];
         extra-trusted-public-keys = [
