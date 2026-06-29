@@ -22,10 +22,13 @@
         ];
         packages = with pkgs; [
             bat
+            ethtool
             eza
             git
+            iperf
             jq
             net-tools
+            pciutils
             ripgrep
             tealdeer
             tmux
