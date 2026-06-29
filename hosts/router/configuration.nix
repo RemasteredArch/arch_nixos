@@ -36,7 +36,8 @@
             zip
         ];
         openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKP5f8jfyl79+ta53BkUTZoMHxI8H0Dh+jsMW4lqp0BH arch@remasteredarch.net"
+            # `arch@remasteredarch.net`
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKP5f8jfyl79+ta53BkUTZoMHxI8H0Dh+jsMW4lqp0BH"
         ];
     };
 
