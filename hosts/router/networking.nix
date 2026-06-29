@@ -10,6 +10,10 @@
             matchConfig.PermanentMACAddress = "2c:cf:67:50:3d:bb";
             linkConfig.Name = "ob-eth";
         };
+        "11-add-on-ethernet" = {
+            matchConfig.PermanentMACAddress = "00:e0:4c:00:11:53";
+            linkConfig.Name = "add-eth";
+        };
         "12-usb-ethernet" = {
             matchConfig.PermanentMACAddress = "0c:37:96:77:8c:32";
             linkConfig.Name = "usb-eth";
@@ -44,6 +48,17 @@
             wakeOnLan.enable = true;
         };
 
+        interfaces.add-eth = {
+            useDHCP = true;
+
+            ipv4.addresses = [
+                {
+                    address = "192.168.68.208";
+                    prefixLength = 22;
+                }
+            ];
+        };
+
         hosts = {
             "192.168.68.210" = [ "arch-laptop" ];
             "192.168.68.211" = [ "arch-pc" ];
@@ -51,8 +66,8 @@
 
         nat = {
             enable = true;
-            externalInterface = "usb-eth";
-            internalInterfaces = [ "ob-eth" ];
+            externalInterface = "ob-eth";
+            internalInterfaces = [ "add-eth" ];
         };
 
         # No open ports by default, only open ports on internal interfaces.
