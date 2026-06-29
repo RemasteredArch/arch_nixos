@@ -15,5 +15,16 @@
             enable = true;
             value = 5000;
         };
+
+        # Enable the external PCIe link.
+        pciex1 = {
+            enable = true;
+            value = "on";
+        };
+        # Attempt to overclock the external PCIe link to gen 3 (up from gen 2).
+        pciex1_gen = {
+            enable = true;
+            value = "3";
+        };
     };
 }
