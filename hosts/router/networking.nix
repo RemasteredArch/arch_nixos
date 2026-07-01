@@ -73,6 +73,10 @@ in
         # Provides multicast DNS and DNS service discovery. Requires UDP port 5353 to be open.
         services.avahi.enable = true;
 
+        boot.kernel.sysctl = {
+            "net.ipv4.conf.all.arp_filter" = true;
+        };
+
         networking = {
             hostName = "arch-router";
 
