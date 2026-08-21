@@ -114,7 +114,6 @@
                     rust
                     sql
                     ssh_config
-                    tmux
                     toml
                     typescript
                     vim
