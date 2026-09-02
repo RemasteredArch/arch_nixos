@@ -22,10 +22,13 @@
         ];
         packages = with pkgs; [
             bat
+            ethtool
             eza
             git
+            iperf
             jq
             net-tools
+            pciutils
             ripgrep
             tealdeer
             tmux
@@ -33,7 +36,8 @@
             zip
         ];
         openssh.authorizedKeys.keys = [
-            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKP5f8jfyl79+ta53BkUTZoMHxI8H0Dh+jsMW4lqp0BH arch@remasteredarch.net"
+            # `arch@remasteredarch.net`
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKP5f8jfyl79+ta53BkUTZoMHxI8H0Dh+jsMW4lqp0BH"
         ];
     };
 
@@ -42,7 +46,6 @@
             "nix-command"
             "flakes"
         ];
-        trusted-users = [ "arch" ]; # TO-DO: remove, this grants passwordless `sudo`.
 
         extra-substituters = [ "https://nixos-raspberrypi.cachix.org" ];
         extra-trusted-public-keys = [

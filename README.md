@@ -13,11 +13,11 @@
 > and I expect that the `server` host is completely broken.
 
 - `hosts/server/`: my home server.
-- `hosts/loaner-laptop/`: the NixOS-WSL instance running on my current laptop.
+- `hosts/loaner-laptop/`: the NixOS-WSL instance that previously ran on my current laptop.
   - Note that the flake output for this is named `wsl`, not `loaner-laptop`.
     See [`f1a8503`](https://github.com/RemasteredArch/arch_nixos/commit/f1a8503)
     for more details on the matter.
-- `hosts/laptop/`: the graphical NixOS instance that will eventually run on my laptop.
+- `hosts/laptop/`: the graphical NixOS instance that now runs on my laptop.
   - This host installs two unfree packages
     (though adding more is not considered a breaking change):
     Discord and Microsoft's Core Fonts for the Web.
