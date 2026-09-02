@@ -226,6 +226,7 @@ in
     home.file.".config/nvim" = lib.mkIf cfg.trackedNeovimConfig { source = nvim-config; };
     home.file.".config/wezterm" = lib.mkIf cfg.trackedWezTermConfig { source = wezterm-config; };
     home.file.".config/gdb".source = dotfiles + "/.config/gdb";
+    home.file.".lldbinit".source = dotfiles + "/.lldbinit";
 
     programs.git = {
         enable = true;
