@@ -35,6 +35,14 @@ args@{
         themePackages = with pkgs; [ plymouth-blahaj-theme ];
     };
 
+    # Firmware updates.
+    #
+    # Not automatically applied, you do still have to manually `fwupdmgr refresh` and
+    # `fwupdmgr update`
+    #
+    # See: <https://wiki.nixos.org/wiki/Fwupd>.
+    services.fwupd.enable = true;
+
     time.timeZone = "America/Los_Angeles";
     i18n.defaultLocale = "en_US.UTF-8";
     services.xserver.xkb.layout = "us";
