@@ -68,10 +68,11 @@ in
         nixpkgs.config.allowUnfreePredicate =
             pkg:
             builtins.elem (lib.getName pkg) [
-                # Add additional package names here
                 "discord"
                 "discord-unwrapped"
                 "corefonts"
+                "steam"
+                "steam-unwrapped"
             ];
 
         fonts = lib.mkIf cfg.desktop {

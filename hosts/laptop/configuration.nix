@@ -59,4 +59,19 @@ args@{
     services.laptop.gnome.enable = true;
     # Configure more graphical things.
     services.arch-home-manager.desktop = true;
+
+    # Configure Steam.
+    programs.steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+        dedicatedServer.openFirewall = false; # Open ports for Source Dedicated Server hosting
+        localNetworkGameTransfers.openFirewall = false;
+        extraPackages = with pkgs; [
+            libxcursor
+            adwaita-icon-theme
+        ];
+        extraCompatPackages = with pkgs; [
+            proton-ge-bin
+        ];
+    };
 }
