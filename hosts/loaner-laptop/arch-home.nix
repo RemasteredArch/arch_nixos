@@ -79,10 +79,12 @@ in
                     inotify-tools
 
                     clang-tools # For `clangd`.
+                    nil
                 ];
             }))
             rustup
             shellcheck
+            cargo-xwin
 
             # Server tools
             caddy
@@ -93,7 +95,6 @@ in
             # Compilers and build tools
             cmake
             ninja
-            # clang
             gcc
             javaPackages.compiler.openjdk25
             typst
@@ -148,6 +149,7 @@ in
                     brave
                     constrict
                     gimp
+                    localsend
                     obs-studio
                     onlyoffice-desktopeditors
                     rpi-imager
@@ -155,6 +157,9 @@ in
                     vlc
                     wezterm
                     wl-clipboard
+                    caffeine-ng
+
+                    wine64Packages.waylandFull
 
                     # Unfree packages.
                     discord # Installing Discord from Nixpkgs disables Krisp.
