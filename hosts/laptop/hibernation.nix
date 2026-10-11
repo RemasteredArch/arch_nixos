@@ -1,11 +1,17 @@
 # Configures sleeping (suspending to memory) and hibernation (suspending to disk).
 #
 # Based off of <https://nixos.wiki/wiki/Hibernation>.
+let
+    # You would want `"suspend-then-hibernate"` for a functioning device.
+    lidBehavior = "ignore";
+in
 {
     services.logind.settings.Login = {
-        LidSwitch = "suspend-then-hibernate";
         PowerKey = "hibernate";
         PowerKeyLongPress = "poweroff";
+        HandleLidSwitch = lidBehavior;
+        # I don't think this does anything.
+        LidSwitch = lidBehavior;
     };
 
     # Probably irrelevant if `MemorySleepMode` is configured in systemd.
