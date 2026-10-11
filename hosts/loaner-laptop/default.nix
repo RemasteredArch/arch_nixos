@@ -87,6 +87,8 @@ args@{
 
     programs.tmux = import ../../common/tmux.nix args;
 
+    # TO-DO: GNOME 51 brought `oo7`, a new secret manager using the DBus Secret Service API. Does
+    # that replace gnome-keyring? Should I update this configuration to use that instead? How?
     services.gnome.gnome-keyring.enable = true;
     # Enabled by default with gnome-keyring, but I figured it's good to be explicit.
     services.gnome.gcr-ssh-agent.enable = true;
