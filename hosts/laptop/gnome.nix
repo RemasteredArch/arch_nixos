@@ -30,7 +30,7 @@ in
         environment.systemPackages = with pkgs.gnomeExtensions; [
             appindicator
         ];
-        programs.dconf.profiles.user.databases = [
+        programs.dconf.profiles.user.databases = with lib.gvariant; [
             {
                 settings = {
                     "org/gnome/mutter" = {
@@ -42,8 +42,8 @@ in
                         ];
                     };
                     "org/gnome/desktop/wm/keybindings" = {
-                        switch-applications = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
-                        switch-applications-backward = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
+                        switch-applications = mkEmptyArray type.string;
+                        switch-applications-backward = mkEmptyArray type.string;
 
                         switch-windows = [ "<Alt>Tab" ];
                         switch-windows-backward = [ "<Shift><Alt>Tab" ];
@@ -51,7 +51,7 @@ in
                     "org/gnome/shell" = {
                         disable-user-extensions = false;
                         # Might not be necessary.
-                        disabled-extensions = lib.gvariant.mkEmptyArray lib.gvariant.type.string;
+                        disabled-extensions = mkEmptyArray type.string;
                         # Might not be necessary.
                         enabled-extensions = [ "appindicatorsupport@rgcjonas.gmail.com" ];
                     };
