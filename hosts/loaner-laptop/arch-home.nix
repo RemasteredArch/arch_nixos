@@ -192,9 +192,6 @@ in
     programs.bash = {
         enable = true;
         sessionVariables = {
-            # Prompt for non-tmux sessions.
-            PS1 = "\\[${colors.green}\\]$ \\u @ \\H > \\w > \\[${colors.reset}\\]";
-
             EDITOR = "nvim";
             VISUAL = "$EDITOR";
             SYSTEMD_EDITOR = "$EDITOR";
@@ -212,6 +209,12 @@ in
             alias clock="${dotfiles}/scripts/dotfiles/clock.sh"
             . "${dotfiles}/scripts/dotfiles/number_conversion.sh"
             . "$HOME/.arch_aliases"
+
+            # Prompt for non-tmux sessions.
+            #
+            # Needs to be configured in `initExtra` instead of `sessionVariables` to avoid getting
+            # overwritten.
+            PS1="\[${colors.green}\]\$ \u @ \H > \w > \[${colors.reset}\]" # e.g. `$ arch @ PC > ~ > `
         '';
     };
     home.file.".arch_aliases".source = dotfiles + "/.arch_aliases";
