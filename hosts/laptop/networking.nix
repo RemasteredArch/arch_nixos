@@ -42,8 +42,12 @@ in
             };
         };
 
-        # Provides multicast DNS and DNS service discovery. Requires UDP port 5353 to be open.
-        services.avahi.enable = true;
+        # Provides multicast DNS and DNS service discovery.
+        services.avahi = {
+            enable = true;
+            # Opens UDP port 5353.
+            openFirewall = true;
+        };
 
         services.openssh = {
             enable = true;
@@ -80,16 +84,14 @@ in
                 "192.168.68.211" = [ "arch-pc" ];
             };
 
+            # Note that many services open firewall ports on their own, so this is not an exhaustive
+            # list.
             firewall = {
                 enable = true;
 
-                # Only allow inbound connections from an Ethernet connection.
                 interfaces.usb-eth = lib.mkIf cfg.configureUsbEthernet {
                     allowedTCPPorts = [
                         22 # Used by OpenSSH.
-                    ];
-                    allowedUDPPorts = [
-                        5353 # Used by Avahi for mDNS/DNS-SD.
                     ];
                 };
             };
