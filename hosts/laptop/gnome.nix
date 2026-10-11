@@ -61,6 +61,7 @@ in
         environment.gnome.excludePackages = with pkgs; [
             epiphany
             gnome-console
+            gnome-contacts
         ];
     };
 }
