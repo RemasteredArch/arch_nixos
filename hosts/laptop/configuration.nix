@@ -53,6 +53,7 @@ args@{
     #
     # - <https://linuxblog.io/zswap-better-than-zram/>
     # - <https://www.theregister.com/2026/03/13/zram_vs_zswap/>
+    # - <https://chrisdown.name/2026/03/24/zswap-vs-zram-when-to-use-what.html>
     boot.zswap.enable = true;
 
     # Configure GNOME.
